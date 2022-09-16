@@ -2,6 +2,8 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import auth from '../net/auth';
 import BaseLayout from "../components/BaseLayer";
+import { useRouter } from "next/router";
+
 
 
 
@@ -10,12 +12,14 @@ export default function SignIn() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
   const submit = () => {
     console.log({ email, password });
     signInWithEmailAndPassword(auth, email, password)
       .then(res => {
         console.log(res);
+        router.push('/');
       })
       .catch(error => {
         console.warn(error);
